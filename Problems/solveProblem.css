@@ -1,9 +1,50 @@
-.code-editor {
+#codeEditor {
     height: 300px;
 }
 .editor-container {
     margin-top: 20px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    border-radius: 10px;
+    background-color: aliceblue;
 }
 .form-control {
     resize: none;
+}
+
+
+.CodeMirror{
+    border: 1px solid black;
+}
+
+.status {
+    padding: 10px;            /* Add some padding */
+    border-radius: 5px;       /* Rounded corners */
+    font-weight: bold;        /* Bold text */
+    display: inline-block;    /* Inline block layout */
+    color: #fff;              /* White text color */
+}
+
+.accepted {
+    background-color: #28a745; /* Green background */
+}
+
+.wrong-answer {
+    background-color: #ffc107; /* Orange background */
+    color: #212529;            /* Dark text color for contrast */
+}
+
+.tle {
+    background-color: #dc3545; /* Red background */
+}
+
+.error {
+    background-color: #dc3545; /* Red background */
+}
+
+.btn:disabled {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    cursor: not-allowed;
 }
