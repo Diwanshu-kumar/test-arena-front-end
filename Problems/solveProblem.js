@@ -30,8 +30,8 @@ document.getElementById('submitButton').addEventListener('click', function() {
     console.log('Submit button clicked');
 });
 
-
-const problemId = 26;
+const urlParams = new URLSearchParams(window.location.search);
+const problemId = decodeURIComponent(urlParams.get("problemId"));
 
 const url = `http://localhost:8080/api/v1/problem/details?problemId=${problemId}`;
 
@@ -42,6 +42,7 @@ function fetchProblemDetails(problemId) {
     fetch(url)
         .then(response => {
             if (!response.ok) {
+                document.body.innerHTML = "<h3>problem does not exist.</h3>";
                 throw new Error('Network response was not ok');
             }
             return response.json(); // Assuming the response is JSON

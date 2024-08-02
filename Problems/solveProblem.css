@@ -1,3 +1,16 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    color: #333;
+    /*background: rgba(99, 90, 90, 0.53);*/
+    /*background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");*/
+    background-color: rgba(33, 33, 44, 0.26);
+    background-image: url("https://www.transparenttextures.com/patterns/fresh-snow.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+    background-size: cover;
+    background-attachment: fixed;
+}
+
 #codeEditor {
     height: 300px;
 }

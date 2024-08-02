@@ -1,0 +1,12 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #787b83 0%, #b5bfbf 100%);
+    background-size: cover, 100px 100px;
+    background-blend-mode: overlay;
+}
