@@ -1,0 +1,163 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    color: #333;
+    background: #f5f5f5;
+    background-image: url('https://www.transparenttextures.com/patterns/purty-wood.png');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+/** Hero Section *!*/
+.hero {
+    /*background: #004d40;*/
+    /*color: #fff;*/
+    padding: 100px 0;
+    text-align: center;
+    background-color: rgba(48, 48, 45, 0.32);
+    background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+    background-size: cover;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero h2 {
+    font-size: 2.5em;
+    margin: 0 0 20px 0;
+}
+
+.hero p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.hero .cta-button {
+    text-decoration: none;
+    color: #004d40;
+    background-color: #fff;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.2em;
+    font-weight: 700;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.hero .cta-button:hover {
+    background-color: #f0f0f0;
+    color: #00332c;
+}
+
+
+
+/* Info Section */
+.info-section {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: -50px;
+}
+
+.info-section section {
+    margin-bottom: 40px;
+}
+
+.info-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Header */
+header {
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+header nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+header nav a:hover {
+    color: #f0a500;
+}
+
+/* Main Content */
+main {
+    padding: 50px 0;
+}
+
+.welcome {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.welcome h2 {
+    font-size: 2em;
+}
+
+.welcome p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.how-to-use {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.how-to-use h2 {
+    font-size: 1.8em;
+    text-align: center;
+}
+
+.how-to-use ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.how-to-use ul li {
+    font-size: 1.2em;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer p {
+    margin: 0;
+}
