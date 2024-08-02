@@ -74,7 +74,7 @@ const generateJson = ()=> {
     const jsonData = {
         title: title,
         description: convertMarkdownToHTML(description),
-        constraint: convertMarkdownToHTML(constraint),
+        problemConstraint: convertMarkdownToHTML(constraint),
         sampleInput: sampleInput,
         sampleOutput: sampleOutput,
         explanation: convertMarkdownToHTML(explanation),

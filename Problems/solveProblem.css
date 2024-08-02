@@ -1,0 +1,9 @@
+.code-editor {
+    height: 300px;
+}
+.editor-container {
+    margin-top: 20px;
+}
+.form-control {
+    resize: none;
+}
