@@ -1,0 +1,76 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #f9f9f9, #f1f1f1);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+#sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#content {
+    margin-left: 250px;
+}
+
+.card {
+    border-radius: 10px;
+    border: none;
+    background: #fff;
+}
+
+.card-title {
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.btn-group .btn {
+    margin-right: 5px;
+    border-radius: 50px;
+}
+
+.btn-outline-primary {
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.badge {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    border-radius: 12px;
+}
+
+#sidebar .nav-link {
+    font-size: 1.1rem;
+    transition: all 0.3s;
+}
+
+#sidebar .nav-link:hover {
+    text-decoration: underline;
+}
