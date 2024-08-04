@@ -10,3 +10,6 @@ body {
     background-size: cover, 100px 100px;
     background-blend-mode: overlay;
 }
+.form-group {
+    margin-bottom: 15px;
+}
