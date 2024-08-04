@@ -10,27 +10,40 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="./../index.html">Online Judge</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">My Submissions</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./listOfProblem.html">Problems</a>
-                    </li>
-                </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Online Judge</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">submissions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Problems</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">add problem</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+            <div class="d-flex">
+                <button id="loginButton" class="btn btn-primary me-2">Login</button>
+                <div id="userDetails" class="d-none text-white">
+                    <span id="usernameDisplay" class="me-2">Username</span>
+                    <button id="logoutButton" class="btn btn-danger">Logout</button>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <div class="container mt-5">
         <h2 id="problem-title">Problem Title</h2>
@@ -96,6 +109,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/clike/clike.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
     <script src="./solveProblem.js"></script>
-
+<script src="./../navbar.js"></script>
 </body>
 </html>

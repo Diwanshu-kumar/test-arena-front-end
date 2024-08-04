@@ -3,6 +3,10 @@ a{
     color: inherit;
 }
 
+.stick-right{
+    float: right;
+}
+
 .user-info, .statistics {
     padding: 10px;
     position:inherit;
