@@ -115,6 +115,17 @@ function submitData(url, data, type) {
 
 }
 
+
+document.getElementById("login-link").addEventListener('click', function(event) {
+    event.preventDefault();
+    showLoginForm();
+})
+
+document.getElementById("register-link").addEventListener('click', function(event) {
+    event.preventDefault();
+    showRegistrationForm();
+})
+
 function showRegistrationForm() {
     document.getElementById('loginForm').style.display = 'none';
     document.getElementById('registrationForm').style.display = 'block';
