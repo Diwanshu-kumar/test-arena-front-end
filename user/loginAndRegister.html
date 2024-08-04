@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glassmorphism Login Form | Online Judge</title>
+    <link rel="stylesheet" href="loginAndRegister.css">
+</head>
+<body>
+
+<div class="wrapper">
+    <form action="#" id="loginForm" >
+        <h2>Login</h2>
+        <div class="input-field">
+            <input type="text" required name="username">
+            <label >username or email</label>
+        </div>
+        <div class="input-field">
+            <input type="password" required  name="password">
+            <label >Password</label>
+        </div>
+        <button type="submit">Log In</button>
+        <div class="register">
+            <p>Don't have an account? <a href="#" onclick="showRegistrationForm()">Register</a></p>
+        </div>
+    </form>
+
+    <form action="#" id="registrationForm" style="display:none;">
+        <h2>Register</h2>
+        <div class="input-field">
+            <input type="text" required name="full-name">
+            <label >Enter your full name</label>
+        </div>
+        <div class="input-field">
+            <input type="text" required name="username">
+            <label >username</label>
+        </div>
+        <div class="input-field">
+            <input type="text" required name="email">
+            <label  >E-mail</label>
+        </div>
+        <div class="input-field">
+            <input type="password" required name="password">
+            <label >password</label>
+        </div>
+        <button type="submit">Register</button>
+        <div class="register">
+            <p>already registered ? <a href="#" onclick="showLoginForm()">Login</a></p>
+        </div>
+    </form>
+
+
+</div>
+
+<script src="./../config.js"></script>
+<script src="loginAndRegister.js">
+
+</script>
+</body>
+</html>
