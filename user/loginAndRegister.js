@@ -1,8 +1,11 @@
-// auth.js
-//baseUrl
-const API_BASE_URL = window.AppConfig.API_BASE_URL;
+import CONFIG from "../config.js";
 
-console.log(API_BASE_URL);
+const API_BASE_URL = CONFIG.API_BASE_URL;
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const redirectUrl = urlParams.get("redirect");
+
 // Event listener for form submission
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
@@ -59,9 +62,12 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
             localStorage.setItem('jwtToken', data.jwt);
             localStorage.setItem('username', data.username);
             console.log('Login successful! Token stored.');
-
+            // console.log(redirectUrl);
             // Redirect to the home page
-            window.location.href = './../index.html';
+            if(redirectUrl){
+                window.location.href = decodeURIComponent(redirectUrl);
+            }else
+                window.location.href = "./../index.html";
         })
         .catch(error => {
             // Handle errors (e.g., invalid credentials)
@@ -73,7 +79,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 
 function submitData(url, data, type) {
 
-    fetch('http://localhost:8080/api/v1/auth/register', {
+    fetch(`${API_BASE_URL}/auth/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

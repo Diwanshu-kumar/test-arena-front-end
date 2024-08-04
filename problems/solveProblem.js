@@ -1,3 +1,18 @@
+import loginAndLogout from "../utils.js";
+import CONFIG from "../config.js";
+
+const API_BASE_URL = CONFIG.API_BASE_URL;
+
+const urlParams = new URLSearchParams(window.location.search);
+const problemId = decodeURIComponent(urlParams.get("problemId"));
+
+document.addEventListener("DOMContentLoaded", () => {
+    loginAndLogout(`./../user/loginAndRegister.html?redirect=${encodeURIComponent(window.location.href)}`,
+        encodeURIComponent("./../index.html"));
+})
+
+/******************** above code check login and logout state *****************/
+
 // Initialize CodeMirror
 const editor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
     mode: "text/x-c++src", // Default mode
@@ -30,14 +45,10 @@ document.getElementById('submitButton').addEventListener('click', function() {
     console.log('Submit button clicked');
 });
 
-const urlParams = new URLSearchParams(window.location.search);
-const problemId = decodeURIComponent(urlParams.get("problemId"));
-
-const url = `http://localhost:8080/api/v1/problem/details?problemId=${problemId}`;
 
 // Function to fetch problem details and populate the HTML
 function fetchProblemDetails(problemId) {
-    const url = `http://localhost:8080/api/v1/problem/details?problemId=${problemId}`;
+    const url = `${API_BASE_URL}/problem/details?problemId=${problemId}`;
 
     fetch(url)
         .then(response => {
@@ -79,6 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+/*****run and submit behaviour ****************/
+
 const runOutputContainer = document.getElementById("run-output-container");
 let verdict =document.getElementById("verdictOutput");
 
@@ -99,7 +112,7 @@ runButton.addEventListener('click', () => {
         problemId: problemId
     };
 
-    fetch('http://localhost:8080/api/v1/user/run', {
+    fetch(`${API_BASE_URL}/user/run`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -145,7 +158,7 @@ submitButton.addEventListener('click', () => {
         problemId: problemId
     };
 
-    fetch('http://localhost:8080/api/v1/user/submit', {
+    fetch(`${API_BASE_URL}/user/submit`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -1,36 +1,15 @@
+import loginAndLogout from "../utils.js";
+import CONFIG  from "../config.js";
+
+const API_BASE_URL = CONFIG.API_BASE_URL;
+
 document.addEventListener('DOMContentLoaded', () => {
-    const loginButton = document.getElementById('loginButton');
-    const logoutButton = document.getElementById('logoutButton');
-    const userDetails = document.getElementById('userDetails');
-    const usernameDisplay = document.getElementById('usernameDisplay');
+    const loginPage = "./../user/loginAndRegister.html";
+    const homePage = "./../index.html";
 
-    // Check if user is logged in
-    const token = localStorage.getItem('jwtToken');
-    const username = localStorage.getItem('username');
-
-    if (token && username) {
-        loginButton.classList.add('d-none');
-        usernameDisplay.textContent = username;
-        userDetails.classList.remove('d-none');
-    } else {
-        loginButton.classList.remove('d-none');
-        userDetails.classList.add('d-none');
-    }
-
-    // Handle login button click
-    loginButton.addEventListener('click', () => {
-        // Redirect to login page
-        window.location.href = '../user/loginAndRegister.html';
-    });
-
-    // Handle logout button click
-    logoutButton.addEventListener('click', () => {
-        // Clear localStorage and redirect to home page
-        localStorage.removeItem('jwtToken');
-        localStorage.removeItem('username');
-        window.location.href = './index.html';
-    });
+    loginAndLogout(`${loginPage}?redirect=${window.location.href}`,homePage);
 });
+
 
 /******* login and logout validation above ******/
 
@@ -121,7 +100,6 @@ const generateJson = ()=> {
     // Print JSON to console (or you could send it to your server)
     console.log(JSON.stringify(jsonData, null, 2));
 
-    // Optional: Display JSON in an alert (not ideal for large data)
     // alert(JSON.stringify(jsonData, null, 2));
     return jsonData;
 }
@@ -131,7 +109,7 @@ document.getElementById('newProblemForm').addEventListener('submit', (event)=>{
     const problemData = generateJson();
 
     // Send the POST request using fetch
-    fetch('http://localhost:8080/api/v1/problem/user/newProblem', {
+    fetch(`${API_BASE_URL}/problem/user/newProblem`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

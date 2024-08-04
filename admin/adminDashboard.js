@@ -1,6 +1,17 @@
+import loginAndLogout from "../utils.js";
+import CONFIG from "../config.js";
+
+const API_BASE_URL = CONFIG.API_BASE_URL;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginPage = "./../user/loginAndRegister.html";
+    const homePage = "./../index.html";
+
+    loginAndLogout(`${loginPage}?redirect=${window.location.href}`,homePage);
+});
 
 
-const API_BASE_URL = window.AppConfig.API_BASE_URL;
+
 
 const problemListUrl = `${API_BASE_URL}/problem/admin/problems`;
 
