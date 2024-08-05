@@ -21,7 +21,7 @@ const editor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
 });
 
 // Update the mode based on selected language
-document.getElementById('language').addEventListener('change', function() {
+document.getElementById('language').addEventListener('change', function () {
     let mode = 'text/x-c++src'; // Default
     switch (this.value) {
         case 'java':
@@ -35,12 +35,12 @@ document.getElementById('language').addEventListener('change', function() {
 });
 
 // Event listeners for Run and Submit buttons
-document.getElementById('runButton').addEventListener('click', function() {
+document.getElementById('runButton').addEventListener('click', function () {
     // Handle Run button logic
     console.log('Run button clicked');
 });
 
-document.getElementById('submitButton').addEventListener('click', function() {
+document.getElementById('submitButton').addEventListener('click', function () {
     // Handle Submit button logic
     console.log('Submit button clicked');
 });
@@ -78,7 +78,7 @@ fetchProblemDetails(problemId);
 
 document.addEventListener('DOMContentLoaded', () => {
     // Load saved data from localStorage
-    editor.setSize(null,"500px");
+    editor.setSize(null, "500px");
     const savedCode = localStorage.getItem('codeEditorContent');
     if (savedCode) {
         editor.setValue(savedCode);
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /*****run and submit behaviour ****************/
 
 const runOutputContainer = document.getElementById("run-output-container");
-let verdict =document.getElementById("verdictOutput");
+let verdict = document.getElementById("verdictOutput");
 
 const runButton = document.getElementById('runButton');
 const submitButton = document.getElementById('submitButton');
@@ -124,21 +124,21 @@ runButton.addEventListener('click', () => {
             runButton.disabled = false;
             console.log('Success:', data);
             // Handle the response data here, e.g., display the output
-            document.getElementById("sampleOutput").innerHTML=`${data.result} \n*****************************************\nexecution time = ${data.executionTime} ms`
+            document.getElementById("sampleOutput").innerHTML = `${data.result} \n*****************************************\nexecution time = ${data.executionTime} ms`
         })
         .catch((error) => {
             runButton.disabled = false;
             console.error('Error:', error);
             const runOutputContainer = document.getElementById("run-output-container");
-            let verdict =document.getElementById("verdictOutput");
+            let verdict = document.getElementById("verdictOutput");
             verdict.innerText = "connection issue";
             verdict.className = "status error";
-            runOutputContainer.insertBefore(verdict,runOutputContainer.firstChild);
+            runOutputContainer.insertBefore(verdict, runOutputContainer.firstChild);
             // Handle errors here
         });
 });
 
-const removeRunStatus = () =>{
+const removeRunStatus = () => {
     verdict.innerText = "";
     verdict.className = "";
 }
@@ -149,10 +149,10 @@ submitButton.addEventListener('click', () => {
     removeRunStatus();
     submitButton.disabled = true;
     const code = editor.getValue();
-    const userId = '1'; // Replace with actual user ID
+    const username = localStorage.getItem('username'); // Replace with actual user ID
     const language = document.getElementById('language').value; // Replace with actual selected language
     const requestData = {
-        userId: userId,
+        username: username,
         language: language,
         code: code,
         problemId: problemId
@@ -170,31 +170,31 @@ submitButton.addEventListener('click', () => {
             submitButton.disabled = false;
             console.log('Success:', data);
             // Handle the response data here, e.g., display the output
-            const sampleOutput =document.getElementById("sampleOutput");
-            if(data.verdict==="AC"){
+            const sampleOutput = document.getElementById("sampleOutput");
+            if (data.verdict === "AC") {
                 verdict.innerText = "Accepted";
                 verdict.className = "status accepted";
-            }else if(data.verdict==="WA"){
+            } else if (data.verdict === "WA") {
                 verdict.innerText = "Wrong-answer";
                 verdict.className = "status wrong-answer";
-            }else if(data.verdict==="TLE"){
+            } else if (data.verdict === "TLE") {
                 verdict.innerText = "TLE";
                 verdict.className = "status tle";
-            }else{
+            } else {
                 verdict.innerText = "error";
                 verdict.className = "status error";
             }
-            sampleOutput.innerHTML=`${data.result} \n*****************************************\nexecution time = ${data.executionTime} ms`
-            runOutputContainer.insertBefore(verdict,runOutputContainer.firstChild);
+            sampleOutput.innerHTML = `${data.result} \n*****************************************\nexecution time = ${data.executionTime} ms`
+            runOutputContainer.insertBefore(verdict, runOutputContainer.firstChild);
         })
         .catch((error) => {
             submitButton.disabled = false;
             console.error('Error:', error);
             const runOutputContainer = document.getElementById("run-output-container");
-            let verdict =document.getElementById("verdictOutput");
+            let verdict = document.getElementById("verdictOutput");
             verdict.innerText = "connection issue";
             verdict.className = "status error";
-            runOutputContainer.insertBefore(verdict,runOutputContainer.firstChild);
+            runOutputContainer.insertBefore(verdict, runOutputContainer.firstChild);
             // Handle errors here
         });
 });
