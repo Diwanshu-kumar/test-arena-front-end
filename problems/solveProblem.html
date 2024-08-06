@@ -37,10 +37,10 @@
                 </li>
             </ul>
             <div class="d-flex">
-                <button id="loginButton" class="btn btn-primary me-2">Login</button>
+                <button id="loginButton" class="btn btn-outline-secondary me-2">Login</button>
                 <div id="userDetails" class="d-none text-white">
                     <span id="usernameDisplay" class="me-2">Username</span>
-                    <button id="logoutButton" class="btn btn-danger">Logout</button>
+                    <button id="logoutButton" class="btn btn-outline-danger">Logout</button>
                 </div>
             </div>
         </div>
@@ -75,22 +75,24 @@
         <p>Provide an explanation of the sample input and output. Explain how the output is derived from the input.</p>
     </div>
 
-    <div class="submission mt-4">
-        <div class="form-group">
-            <label for="language">Choose Language:</label>
-            <select class="form-select" id="language">
+
+    <div class="editor-container mt-4">
+        <div class="m-2 d-flex">
+
+    <div class="submission d-flex">
+        <div class="form-group d-flex">
+            <label class="m-2" for="language"> Language:</label>
+            <select class="form-select " id="language">
                 <option value="cpp">C++</option>
                 <option value="java">Java</option>
                 <option value="python">Python</option>
             </select>
         </div>
-        <button class="btn btn-primary mt-2" id="runButton">Run</button>
-        <button class="btn btn-success mt-2" id="submitButton">Submit</button>
+        <button class="btn btn-outline-dark mx-2 px-3" id="runButton">Run</button>
+        <button class="btn btn-outline-success mx-2 px-3" id="submitButton">Submit</button>
     </div>
-
-    <div class="editor-container mt-4">
-        <h4>Code Editor:</h4>
-        <textarea id="codeEditor" name="code"></textarea>
+        </div>
+        <textarea id="codeEditor" name="code" placeholder="start writing your code here"></textarea>
     </div>
 
     <div class="mt-4 mb-4" id="run-output-container">
