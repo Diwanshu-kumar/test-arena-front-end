@@ -1,13 +1,14 @@
-import loginAndLogout from "../utils.js";
+import {loginAndLogout,loginModal} from "../utils.js";
 import CONFIG from "../config.js";
 
 const API_BASE_URL = CONFIG.API_BASE_URL;
-
+const AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN");
 const urlParams = new URLSearchParams(window.location.search);
 const problemId = decodeURIComponent(urlParams.get("problemId"));
+const LOGIN_PAGE_URL = `./../user/loginAndRegister.html?redirect=${encodeURIComponent(window.location.href)}`
 
 document.addEventListener("DOMContentLoaded", () => {
-    loginAndLogout(`./../user/loginAndRegister.html?redirect=${encodeURIComponent(window.location.href)}`,
+    loginAndLogout(LOGIN_PAGE_URL,
         encodeURIComponent("./../index.html"));
 })
 
@@ -34,23 +35,18 @@ document.getElementById('language').addEventListener('change', function () {
     editor.setOption('mode', mode);
 });
 
-// Event listeners for Run and Submit buttons
-document.getElementById('runButton').addEventListener('click', function () {
-    // Handle Run button logic
-    console.log('Run button clicked');
-});
-
-document.getElementById('submitButton').addEventListener('click', function () {
-    // Handle Submit button logic
-    console.log('Submit button clicked');
-});
-
 
 // Function to fetch problem details and populate the HTML
 function fetchProblemDetails(problemId) {
     const url = `${API_BASE_URL}/problem/details?problemId=${problemId}`;
 
-    fetch(url)
+    fetch(url,{
+        method: 'GET',
+        mode: 'cors',
+        headers : {
+            'Content-Type': 'application/json',
+        }
+    })
         .then(response => {
             if (!response.ok) {
                 document.body.innerHTML = "<h3>problem does not exist.</h3>";
@@ -77,18 +73,27 @@ function fetchProblemDetails(problemId) {
 fetchProblemDetails(problemId);
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // check if login or not?
+
+    if(!AUTH_TOKEN){
+        addLoginModalToPage();
+    }
+
     // Load saved data from localStorage
     editor.setSize(null, "500px");
-    const savedCode = localStorage.getItem('codeEditorContent');
-    if (savedCode) {
-        editor.setValue(savedCode);
+    let savedCode = localStorage.getItem(`codeEditorContent=${problemId}`);
+    if(!savedCode){
+        savedCode = "// start writing code here!";
     }
+    editor.setValue(savedCode);
 
     // Save data to localStorage on change
     editor.on('change', () => {
-        localStorage.setItem('codeEditorContent', editor.getValue());
+        localStorage.setItem(`codeEditorContent=${problemId}`, editor.getValue());
     });
 });
+
 
 /*****run and submit behaviour ****************/
 
@@ -98,24 +103,36 @@ let verdict = document.getElementById("verdictOutput");
 const runButton = document.getElementById('runButton');
 const submitButton = document.getElementById('submitButton');
 
+const addLoginModalToPage =()=>{
+     loginModal(LOGIN_PAGE_URL,"to run or submit!");
+    runButton.setAttribute("data-bs-toggle", "modal");
+    runButton.setAttribute("data-bs-target","#staticBackdrop");
+    submitButton.setAttribute("data-bs-toggle", "modal");
+    submitButton.setAttribute("data-bs-target","#staticBackdrop");
+}
 // Handle "Run" button click
 runButton.addEventListener('click', () => {
+    if(!AUTH_TOKEN)return;
     runButton.disabled = true;
     removeRunStatus();
     const code = editor.getValue();
-    const userId = '1'; // Replace with actual user ID
+    const USERNAME = localStorage.getItem('username'); // Replace with actual user ID
     const language = document.getElementById('language').value; // Replace with actual selected language
+    console.log(language);
     const requestData = {
-        userId: userId,
+        username: USERNAME,
         language: language,
         code: code,
         problemId: problemId
     };
 
+    console.log(requestData);
+
     fetch(`${API_BASE_URL}/user/run`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AUTH_TOKEN,
         },
         body: JSON.stringify(requestData),
     })
@@ -146,6 +163,7 @@ const removeRunStatus = () => {
 
 // Handle "submit" button click
 submitButton.addEventListener('click', () => {
+    if(!AUTH_TOKEN)return;
     removeRunStatus();
     submitButton.disabled = true;
     const code = editor.getValue();
@@ -162,6 +180,7 @@ submitButton.addEventListener('click', () => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + AUTH_TOKEN,
         },
         body: JSON.stringify(requestData),
     })

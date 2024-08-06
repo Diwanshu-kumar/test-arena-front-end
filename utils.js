@@ -1,4 +1,4 @@
-const loginAndLogout = (loginPage, homePage) =>{
+const loginAndLogout = (loginPage, homePage) => {
     const loginButton = document.getElementById('loginButton');
     const logoutButton = document.getElementById('logoutButton');
     const userDetails = document.getElementById('userDetails');
@@ -6,10 +6,10 @@ const loginAndLogout = (loginPage, homePage) =>{
 
 
     // Check if user is logged in
-    const token = localStorage.getItem('jwtToken');
+    const AUTH_TOKEN = localStorage.getItem('AUTH_TOKEN');
     const username = localStorage.getItem('username');
 
-    if (token && username) {
+    if (AUTH_TOKEN && username) {
         loginButton.classList.add('d-none');
         usernameDisplay.textContent = username;
         userDetails.classList.remove('d-none');
@@ -27,7 +27,7 @@ const loginAndLogout = (loginPage, homePage) =>{
     // Handle logout button click
     logoutButton.addEventListener('click', () => {
         // Clear localStorage and redirect to home page
-        localStorage.removeItem('jwtToken');
+        localStorage.removeItem('AUTH_TOKEN');
         localStorage.removeItem('username');
         console.log(homePage);
         location.reload();
@@ -35,4 +35,28 @@ const loginAndLogout = (loginPage, homePage) =>{
     });
 }
 
-export default loginAndLogout;
+
+const loginModal = (loginPage,message) => {
+
+    const node = document.createElement('div');
+    node.innerHTML = `
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Login </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body m-2 " id="model-body">
+                        <h3><a style="text-decoration: none" href=${loginPage}>Login </a> ${message} </h3>
+                    </div>
+                </div>
+            </div>
+        </div>`
+
+    document.body.appendChild(node);
+}
+
+
+export {loginAndLogout , loginModal};

@@ -1,4 +1,4 @@
-import loginAndLogout from "./utils.js";
+import {loginAndLogout} from "./utils.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginPage = "./user/loginAndRegister.html";

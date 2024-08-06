@@ -59,11 +59,8 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         })
         .then(data => {
             // Store the JWT token in local storage
-            localStorage.setItem('jwtToken', data.jwt);
+            localStorage.setItem('AUTH_TOKEN', data.jwt);
             localStorage.setItem('username', data.username);
-            console.log('Login successful! Token stored.');
-            // console.log(redirectUrl);
-            // Redirect to the home page
             if(redirectUrl){
                 window.location.href = decodeURIComponent(redirectUrl);
             }else

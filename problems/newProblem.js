@@ -1,13 +1,20 @@
-import loginAndLogout from "../utils.js";
+import {loginAndLogout,loginModal} from "../utils.js";
 import CONFIG  from "../config.js";
 
 const API_BASE_URL = CONFIG.API_BASE_URL;
+const AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN");
+const LOGIN_PAGE_URL = `./../user/loginAndRegister.html?redirect=${encodeURIComponent(window.location.href)}`
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    const loginPage = "./../user/loginAndRegister.html";
     const homePage = "./../index.html";
-
-    loginAndLogout(`${loginPage}?redirect=${window.location.href}`,homePage);
+    if(!AUTH_TOKEN){
+        loginModal(LOGIN_PAGE_URL," to Add problem. ");
+        const submitProblemBtn = document.getElementById('submit-problem-btn');
+        submitProblemBtn.setAttribute("data-bs-toggle", "modal");
+        submitProblemBtn.setAttribute("data-bs-target","#staticBackdrop");
+    }
+    loginAndLogout(LOGIN_PAGE_URL,homePage);
 });
 
 
@@ -106,6 +113,8 @@ const generateJson = ()=> {
 
 document.getElementById('newProblemForm').addEventListener('submit', (event)=>{
     event.preventDefault();
+    if(!AUTH_TOKEN)
+        return;
     const problemData = generateJson();
 
     // Send the POST request using fetch
@@ -113,6 +122,7 @@ document.getElementById('newProblemForm').addEventListener('submit', (event)=>{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + AUTH_TOKEN,
         },
         body: JSON.stringify(problemData),
     })

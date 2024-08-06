@@ -1,4 +1,4 @@
-import loginAndLogout from "../utils.js";
+import {loginAndLogout} from "../utils.js";
 import CONFIG from "../config.js";
 
 const API_BASE_URL = CONFIG.API_BASE_URL;
@@ -17,14 +17,14 @@ const USERNAME = localStorage.getItem("username");
 // Define the API endpoint
 const API_URL = `${API_BASE_URL}/user/submissions?username=${USERNAME}`;
 const LOGIN_PAGE_URL = `./../user/loginAndRegister.html?redirect=${encodeURIComponent(window.location.href)}`;
-const TOKEN = localStorage.getItem('jwtToken');
+const AUTH_TOKEN = localStorage.getItem('AUTH_TOKEN');
 
 
 // Function to fetch submission data
 const fetchSubmissions = async () => {
 
     // If token is not present, prompt the user to log in
-    if (!TOKEN) {
+    if (!AUTH_TOKEN) {
         document.getElementById("submission-table-container").innerHTML = `<h4 class="m-5">
                 <a style="text-decoration : none" href=${LOGIN_PAGE_URL}>Login </a> to see your submissions. </h4>`
         return;
@@ -36,7 +36,7 @@ const fetchSubmissions = async () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${TOKEN}` // Attach the JWT token
+                'Authorization': `Bearer ${AUTH_TOKEN}` // Attach the JWT token
             }
         });
 
@@ -145,7 +145,7 @@ const openSubmittedCode = async (submissionId) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${TOKEN}`
+                'Authorization': `Bearer ${AUTH_TOKEN}`
             }
         });
 

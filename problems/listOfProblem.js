@@ -1,7 +1,8 @@
-import loginAndLogout from "../utils.js";
+import {loginAndLogout} from "../utils.js";
 import CONFIG from "../config.js";
 
 const API_BASE_URL = CONFIG.API_BASE_URL;
+const AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN");
 
 document.addEventListener('DOMContentLoaded', () => {
    const loginPage = "./../user/loginAndRegister.html";
@@ -41,34 +42,24 @@ totalSubmissionsElement.textContent = userData.totalSubmissions;
 const problemListUrl = `${API_BASE_URL}/problem/user/problems`;
 
 const fetchProblemList = async ()=>{
-
-    const response = await fetch(problemListUrl);
-    console.log(response);
+    const response = await fetch(problemListUrl,{
+        method : 'GET',
+        headers : {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'Bearer ' + AUTH_TOKEN,
+        }
+    });
     if(!response.ok){
         alert('No problems found!');
         return;
     }
-    const problemList = response.json();
-
-    console.log(problemList);
+    const problemList = await response.json();
+    addProblemToTheList(problemList);
 
 
 }
 
-fetch(problemListUrl)
-.then(response =>{
-    if(!response.ok){
-        alert('No problems found!');
-
-    }  else{
-        return response.json();
-    }
-}).then(problemList =>{
-
-    addProblemToTheList(problemList);
-}).catch(error =>{
-    console.log(error);
-});
+fetchProblemList();
 
 
 const problemListContainer = document.getElementById('problems-container');

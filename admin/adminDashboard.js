@@ -1,13 +1,14 @@
-import loginAndLogout from "../utils.js";
+import {loginAndLogout} from "../utils.js";
 import CONFIG from "../config.js";
 
 const API_BASE_URL = CONFIG.API_BASE_URL;
+const AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN");
+const LOGIN_PAGE_URL = `./../user/loginAndRegister.html?redirect=${encodeURIComponent(window.location.href)}`;
 
 document.addEventListener('DOMContentLoaded', () => {
-    const loginPage = "./../user/loginAndRegister.html";
     const homePage = "./../index.html";
 
-    loginAndLogout(`${loginPage}?redirect=${window.location.href}`,homePage);
+    loginAndLogout(LOGIN_PAGE_URL,homePage);
 });
 
 
@@ -44,7 +45,21 @@ const clearProblemList = ()=>{
 }
 
 const fetchProblemList = (problemListUrl) =>{
-    fetch(problemListUrl)
+
+    // If token is not present, prompt the user to log in
+    if (!AUTH_TOKEN) {
+        const content = document.getElementById('content');
+        content.innerHTML = `<h4 class="m-5">
+                <a style="text-decoration : none" href=${LOGIN_PAGE_URL}>Login </a> to see the problmes. </h4>`
+        return;
+    }
+
+    fetch(problemListUrl,{
+        method: 'GET',
+        headers : {
+            'Authorization': `Bearer ${AUTH_TOKEN}`,
+        }
+    })
         .then(response =>{
             if(!response.ok){
                 alert('No problems found!');
@@ -131,6 +146,9 @@ const listProblems = (problemList) => {
 const deleteProblem = async (problemId)=>{
     await fetch(API_BASE_URL+'/problem/admin/delete?problemId='+problemId,{
         method:'DELETE',
+        headers : {
+            'Authorization' : 'Bearer ' + AUTH_TOKEN,
+        }
 
     }).then(response =>{
         if(!response.ok){
@@ -153,6 +171,7 @@ const setProblemStatus = async (status, problemId) =>{
         method: 'PUT',
         headers:{
             'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + AUTH_TOKEN,
         }
     }).then(response => {
         return response.ok;
