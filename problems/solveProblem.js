@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // check if login or not?
 
     if(!AUTH_TOKEN){
-        addLoginModalToPage();
+        addLoginModalToPage(" to run of submit!");
     }
 
     // Load saved data from localStorage
@@ -119,8 +119,8 @@ let verdict = document.getElementById("verdictOutput");
 const runButton = document.getElementById('runButton');
 const submitButton = document.getElementById('submitButton');
 
-const addLoginModalToPage =()=>{
-     loginModal(LOGIN_PAGE_URL,"to run or submit!");
+const addLoginModalToPage =(message)=>{
+     loginModal(LOGIN_PAGE_URL,message);
     runButton.setAttribute("data-bs-toggle", "modal");
     runButton.setAttribute("data-bs-target","#staticBackdrop");
     submitButton.setAttribute("data-bs-toggle", "modal");
@@ -152,7 +152,16 @@ runButton.addEventListener('click', () => {
         },
         body: JSON.stringify(requestData),
     })
-        .then(response => response.json())
+        .then(response =>{
+            if(response.status===401){
+                localStorage.removeItem("AUTH_TOKEN");
+                loginAndLogout(LOGIN_PAGE_URL,encodeURIComponent("./../index.html"))
+                alert("Session expired please log in again.");
+                throw new Error("Session expired ");
+            }
+
+            return response.json();
+        })
         .then(data => {
             runButton.disabled = false;
             console.log('Success:', data);
@@ -200,7 +209,15 @@ submitButton.addEventListener('click', () => {
         },
         body: JSON.stringify(requestData),
     })
-        .then(response => response.json())
+        .then(response =>{
+            if(response.status===401 || response.status===403){
+                localStorage.removeItem("AUTH_TOKEN");
+                loginAndLogout(LOGIN_PAGE_URL,encodeURIComponent("./../index.html"))
+                alert("Session expired please log in again.");
+                throw new Error("Session expired ");
+            }
+            return response.json();
+        } )
         .then(data => {
             submitButton.disabled = false;
             console.log('Success:', data);

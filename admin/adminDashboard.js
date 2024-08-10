@@ -1,4 +1,4 @@
-import {loginAndLogout} from "../utils.js";
+import {isTokenExpired, loginAndLogout} from "../utils.js";
 import CONFIG from "../config.js";
 
 const API_BASE_URL = CONFIG.API_BASE_URL;
@@ -12,7 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
+window.addEventListener('load',()=>{
+    if(AUTH_TOKEN && isTokenExpired(AUTH_TOKEN)){
+        localStorage.removeItem('AUTH_TOKEN');
+    }
+})
 
 const problemListUrl = `${API_BASE_URL}/problem/admin/problems`;
 
@@ -61,7 +65,12 @@ const fetchProblemList = (problemListUrl) =>{
         }
     })
         .then(response =>{
-            if(!response.ok){
+            if(response.status === 401){
+                const content = document.getElementById('content');
+                content.innerHTML = `<h4 class="m-5">
+                <a style="text-decoration : none" href=${LOGIN_PAGE_URL}>Login </a> again to see the problems. current session expired  </h4>`
+
+            }else if(!response.ok){
                 alert('No problems found!');
 
             }  else{

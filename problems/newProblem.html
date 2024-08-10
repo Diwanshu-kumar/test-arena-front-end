@@ -47,19 +47,19 @@
 </nav>
 
 <div class="container mt-5">
-    <div class="form-group d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0">Create New Problem</h2>
-        <div class="d-flex align-items-center">
-            <label for="problem-difficulty" class="form-label mb-0 mx-2">Difficulty </label>
-            <select name="difficulty" id="problem-difficulty" class="form-select">
-                <option value="Easy">Easy</option>
-                <option value="Medium">Medium</option>
-                <option value="Hard">Hard</option>
-            </select>
-        </div>
-    </div>
 
     <form id="newProblemForm">
+        <div class="form-group d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Create New Problem</h2>
+            <div class="d-flex align-items-center">
+                <label for="problem-difficulty" class="form-label mb-0 mx-2">Difficulty </label>
+                <select name="difficulty" id="problem-difficulty" class="form-select">
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+            </div>
+        </div>
         <div class="mb-3">
             <label for="title" class="form-label">Title<span class="text-danger"> *</span></label>
             <input type="text" class="form-control" id="title" name="title" placeholder="Enter problem title" required>
@@ -88,12 +88,16 @@
         <h4>System Test Cases</h4>
         <div id="systemTestCases" class="mb-3">
             <div class="mb-3">
-                <label for="systemTestInput1" class="form-label">System Test Case Input 1<span class="text-danger"> *</span></label>
-                <textarea class="form-control system-testcase-input" id="systemTestInput1" name="systemTestInput1" rows="2" required></textarea>
+                <label for="systemTestInput1" class="form-label">System Test Case Input 1<span
+                        class="text-danger"> *</span></label>
+                <textarea class="form-control system-testcase-input" id="systemTestInput1" name="systemTestInput1"
+                          rows="2" required></textarea>
             </div>
             <div class="mb-3">
-                <label for="systemTestOutput1" class="form-label">System Test Case Output 1<span class="text-danger"> *</span></label>
-                <textarea class="form-control system-testcase-output" id="systemTestOutput1" name="systemTestOutput1" rows="2" required></textarea>
+                <label for="systemTestOutput1" class="form-label">System Test Case Output 1<span
+                        class="text-danger"> *</span></label>
+                <textarea class="form-control system-testcase-output" id="systemTestOutput1" name="systemTestOutput1"
+                          rows="2" required></textarea>
             </div>
         </div>
         <div class="d-flex justify-content-between">

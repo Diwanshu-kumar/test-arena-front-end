@@ -7,6 +7,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const problemId = decodeURIComponent(urlParams.get("problemId"));
 
 document.addEventListener("DOMContentLoaded", () => {
+
     loginAndLogout(LOGIN_PAGE_URL,
         encodeURIComponent("./../index.html"));
 })
@@ -25,6 +26,7 @@ const fetchSubmissions = async () => {
 
     // If token is not present, prompt the user to log in
     if (!AUTH_TOKEN) {
+
         document.getElementById("submission-table-container").innerHTML = `<h4 class="m-5">
                 <a style="text-decoration : none" href=${LOGIN_PAGE_URL}>Login </a> to see your submissions. </h4>`
         return;
@@ -39,10 +41,18 @@ const fetchSubmissions = async () => {
                 'Authorization': `Bearer ${AUTH_TOKEN}` // Attach the JWT token
             }
         });
+        if(response.status === 401){
+            localStorage.removeItem("AUTH_TOKEN");
+            loginAndLogout(LOGIN_PAGE_URL,
+                encodeURIComponent("./../index.html"));
+            document.getElementById("submission-table-container").innerHTML = `<h4 class="m-5">Session expired please 
+                <a style="text-decoration : none" href=${LOGIN_PAGE_URL}>Login </a> again to see your submissions. </h4>`
+            return;
+        }
 
         // Check if the response is successful
         if (!response.ok) {
-            throw new Error('Failed to fetch submissions');
+            throw new Error('Failed to fetch submissions. try login again');
         }
 
         // Parse the JSON response
@@ -55,7 +65,7 @@ const fetchSubmissions = async () => {
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Failed to show submissions. Please try again later.');
+        alert('Failed to show submissions. Please try login again.');
     }
 }
 

@@ -30,10 +30,19 @@ const loginAndLogout = (loginPage, homePage) => {
         localStorage.removeItem('AUTH_TOKEN');
         localStorage.removeItem('username');
         console.log(homePage);
+        localStorage.removeItem('AUTH_TOKEN');
         location.reload();
         // window.location.href = "./../index.html";
     });
 }
+
+const  isTokenExpired =(token) =>{
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const expiry = payload.exp * 1000; // Convert to milliseconds
+    console.log(expiry);
+    return Date.now() > expiry;
+}
+
 
 
 const loginModal = (loginPage,message) => {
@@ -59,4 +68,4 @@ const loginModal = (loginPage,message) => {
 }
 
 
-export {loginAndLogout , loginModal};
+export {loginAndLogout , loginModal, isTokenExpired};
