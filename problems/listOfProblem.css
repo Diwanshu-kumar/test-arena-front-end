@@ -3,18 +3,23 @@ a{
     color: inherit;
 }
 
-.stick-right{
-    float: right;
+/*problem list style*/
+.problems-container {
+    /*margin-top:20px;*/
+    padding: 50px;
+    /*margin : 40px;*/
 }
-
-.user-info, .statistics {
-    padding: 10px;
-    position:inherit;
-    /*top: 0;*/
+.problem-title {
+    font-size: 1.2rem;
+    font-weight: bold;
 }
-.problem-list-container {
-    max-height: 80vh; /* Adjust the height as needed */
-    overflow-y: auto;
+.problem-item {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+}
+.problem-item:hover {
+    background-color: #f8f9fa;
 }
 
 .problem-item {
@@ -24,51 +29,29 @@ a{
 .problem-item:last-child {
     border-bottom: none;
 }
-.status-unsolved {
-    /*color: red;*/
+
+
+/*difficulty styling*/
+.difficulty {
+    font-size: 0.9rem;
+    font-weight: 500;
+    background: #6c757d;
 }
-.status-attempted {
+
+.difficulty-type-Easy {
+    /*color: red;*/
+    background-color: green;
+}
+.difficulty-type-Medium {
     color: #d1593e;
 }
-.status-solved {
-    color: green;
+.difficulty-type-Hard {
+    /*color: red;*/
+    background-color: red;
 }
 
-.user-stats {
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    background: #f27121 linear-gradient(135deg, #5f72be 0%, #9921e8 100%);
-    position:sticky;
-    top: 10px;
-    height: 50vh;
-}
 
-.user-info {
-    text-align: center;
-    color: white;
-}
 
-.statistics {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-
-}
-
-.stat {
-    text-align: center;
-    color: white;
-}
-
-.stat-title {
-    font-size: 16px;
-}
-
-.stat-value {
-    font-size: 24px;
-    font-weight: bold;
-}
 
 /* General Styles */
 
@@ -84,18 +67,6 @@ body {
     background-size: cover;
     background-attachment: fixed;
     /*background-blend-mode: overlay;*/
-}
-
-
-/* Additional Styles for Content */
-.content {
-    background: rgba(19, 17, 17, 0.9);
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 80%;
-    max-width: 800px;
-    text-align: center;
 }
 
 

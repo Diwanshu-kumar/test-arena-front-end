@@ -14,26 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /*************************login and logout part above ************/
 
-const usernameElement = document.getElementById('username');
-const fullNameElement = document.getElementById('fullname');
-const totalSolvedElement = document.getElementById('total-solved');
-const problemsAttemptedElement = document.getElementById('problems-attempted');
-const totalSubmissionsElement = document.getElementById('total-submissions');
-
-// Replace with your actual data
-const userData = {
-    username: 'your_username',
-    fullName: 'Your Full Name',
-    totalSolved: 123,
-    problemsAttempted: 456,
-    totalSubmissions: 789
-};
-
-usernameElement.textContent = userData.username;
-fullNameElement.textContent = userData.fullName;
-totalSolvedElement.textContent = userData.totalSolved;
-problemsAttemptedElement.textContent = userData.problemsAttempted;
-totalSubmissionsElement.textContent = userData.totalSubmissions;
 
 
 
@@ -54,46 +34,33 @@ const fetchProblemList = async ()=>{
         return;
     }
     const problemList = await response.json();
-    addProblemToTheList(problemList);
+    renderProblemList(problemList);
 
 
 }
 
-fetchProblemList();
 
+// Function to render the problem list
+function renderProblemList(problems) {
+    const problemList = document.getElementById('problemList');
+    problemList.innerHTML = '';
 
-const problemListContainer = document.getElementById('problems-container');
-// problemListContainer.innerText = "";
-const addProblemToTheList = (problemList)=>{
-    problemList.forEach((problem ,index)=> {
+    problems.forEach((problem,index) => {
+        const listItem = document.createElement('li');
+        listItem.className = 'list-group-item problem-item d-flex justify-content-between align-items-center';
+        listItem.setAttribute('data-id', problem.id);
+        const difficulty = problem.difficulty?problem.difficulty:"not available";
+        listItem.innerHTML = `
+                    <a href="./solveProblem.html?problemId=${problem.problemId}">
+                        <span class="problem-title mx-2">${index+1}.</span>
+                        <span class="problem-title">${problem.title}</span>
+                    </a>
+                    <span class="badge difficulty difficulty-type-${difficulty}">${difficulty}</span>
+                `;
 
-        let problemItem = document.createElement('div');
-        problemItem.setAttribute('id', 'problem-' + problem.problemId);
-        problemItem.className="problem-item";
-        let problemLink = document.createElement('a');
-        problemLink.setAttribute('href', `./solveProblem.html?problemId=${problem.problemId}`);
-        problemLink.setAttribute('target', '_blank');
-        let row = document.createElement('div');
-        row.setAttribute('class', 'row');
-
-        let sN = document.createElement('div');
-        sN.className= "col-1";
-        sN.innerHTML = index+1;
-
-        let problemId = document.createElement('div');
-        problemId.innerHTML = problem.problemId;
-        problemId.className= "col-3";
-
-        let problemTitle = document.createElement('div');
-        problemTitle.className = "col-6";
-        problemTitle.innerText = problem.title;
-
-        row.appendChild(sN);
-        row.appendChild(problemId);
-        row.appendChild(problemTitle);
-
-        problemLink.appendChild(row);
-        problemItem.appendChild(problemLink);
-        problemListContainer.appendChild(problemItem);
+        problemList.appendChild(listItem);
     });
 }
+
+// Initialize the problem list on page load
+document.addEventListener('DOMContentLoaded', fetchProblemList);

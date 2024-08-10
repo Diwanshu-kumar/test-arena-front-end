@@ -69,6 +69,7 @@ document.getElementById('addTestCaseBtn').addEventListener('click', addOneSystem
 const generateJson = ()=> {
     // Extract form data
     const title = document.getElementById('title').value;
+    const difficulty = document.getElementById('problem-difficulty').value;
     const description = document.getElementById('description').value;
     const constraint = document.getElementById('constraint').value;
     const sampleInput = document.getElementById('sampleInput').value;
@@ -96,6 +97,7 @@ const generateJson = ()=> {
 
     const jsonData = {
         title: title,
+        difficulty : difficulty,
         description: convertMarkdownToHTML(description),
         problemConstraint: convertMarkdownToHTML(constraint),
         sampleInput: sampleInput,

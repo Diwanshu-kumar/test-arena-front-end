@@ -33,6 +33,7 @@ document.getElementById('language').addEventListener('change', function () {
             break;
     }
     editor.setOption('mode', mode);
+    loadEditorContent();
 });
 
 
@@ -72,6 +73,29 @@ function fetchProblemDetails(problemId) {
 // Assuming you have a way to get the problemId, for example:
 fetchProblemDetails(problemId);
 
+const loadEditorContent = ()=>{
+    const editorLang = document.getElementById('language');
+
+    const editorContentKey = `codeEditorContent=problemId${problemId}=lang=${
+        editorLang.value
+    }`;
+
+    let savedCode = localStorage.getItem(editorContentKey);
+    if(!savedCode){
+        savedCode = "// start writing code here!";
+    }
+
+    editor.setValue(savedCode);
+
+    // Save data to localStorage on change
+    editor.on('change', () => {
+        const key = `codeEditorContent=problemId${problemId}=lang=${
+            editorLang.value
+        }`;
+        localStorage.setItem(key, editor.getValue());
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // check if login or not?
@@ -81,17 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Load saved data from localStorage
-    editor.setSize(null, "500px");
-    let savedCode = localStorage.getItem(`codeEditorContent=${problemId}`);
-    if(!savedCode){
-        savedCode = "// start writing code here!";
-    }
-    editor.setValue(savedCode);
 
-    // Save data to localStorage on change
-    editor.on('change', () => {
-        localStorage.setItem(`codeEditorContent=${problemId}`, editor.getValue());
-    });
+    editor.setSize(null, "500px");
+    loadEditorContent();
 });
 
 
