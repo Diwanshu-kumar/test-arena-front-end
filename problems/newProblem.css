@@ -1,15 +1,58 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    /*display: flex;*/
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #787b83 0%, #b5bfbf 100%);
-    background-size: cover, 100px 100px;
-    background-blend-mode: overlay;
+    color: #333;
+    /*background: rgba(99, 90, 90, 0.53);*/
+    /*background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");*/
+    background-color: rgba(33, 33, 44, 0.26);
+    background-image: url("https://www.transparenttextures.com/patterns/fresh-snow.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+    background-size: cover;
+    background-attachment: fixed;
+    /*background-blend-mode: overlay;*/
 }
+
 .form-group {
     margin-bottom: 15px;
 }
+
+/*body {*/
+/*    background-color: #f8f9fa;*/
+/*    font-family: Arial, sans-serif;*/
+/*}*/
+
+h2 {
+    font-weight: bold;
+    color: #343a40;
+}
+
+h3 {
+    font-weight: normal;
+    color: #495057;
+}
+
+label.form-label {
+    font-weight: bold;
+    color: #343a40;
+}
+
+.form-control {
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+}
+
+#submit-problem-btn, #addTestCaseBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+#systemTestCases {
+    border: 1px solid #ced4da;
+    padding: 15px;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+}
+
+
+
