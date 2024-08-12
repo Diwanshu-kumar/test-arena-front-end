@@ -134,17 +134,30 @@ runButton.addEventListener('click', () => {
     const code = editor.getValue();
     const USERNAME = localStorage.getItem('username'); // Replace with actual user ID
     const language = document.getElementById('language').value; // Replace with actual selected language
-    console.log(language);
-    const requestData = {
-        username: USERNAME,
-        language: language,
-        code: code,
-        problemId: problemId
-    };
+
+    const customInput = ""+document.getElementById("customInput").value;
+    let requestData;
+    let runUrl = `${API_BASE_URL}/user/`;
+    if(customInput.length>0){
+        runUrl+="runOnCustomTestcase"
+        requestData = {
+            language : language,
+            code : code,
+            customInput : customInput
+        };
+    }else {
+        runUrl+="run";
+        requestData = {
+            username: USERNAME,
+            language: language,
+            code: code,
+            problemId: problemId
+        };
+    }
 
     console.log(requestData);
 
-    fetch(`${API_BASE_URL}/user/run`, {
+    fetch(runUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
