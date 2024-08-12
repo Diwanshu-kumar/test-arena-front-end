@@ -43,7 +43,8 @@ a{
     background-color: green;
 }
 .difficulty-type-Medium {
-    color: #d1593e;
+    background-color: #d1593e;
+
 }
 .difficulty-type-Hard {
     /*color: red;*/

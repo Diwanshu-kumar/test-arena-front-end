@@ -39,7 +39,6 @@ const loginAndLogout = (loginPage, homePage) => {
 const  isTokenExpired =(token) =>{
     const payload = JSON.parse(atob(token.split('.')[1]));
     const expiry = payload.exp * 1000; // Convert to milliseconds
-    console.log(expiry);
     return Date.now() > expiry;
 }
 
