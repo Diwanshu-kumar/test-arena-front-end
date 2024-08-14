@@ -59,12 +59,10 @@ To get a local copy up and running, follow these simple steps.
 
 ### Front-End
    Now for front-end just clone this repo and open the **index.html** page.
-      
-      Clone the repository:
-      ```bash
+   ```
       git clone https://github.com/diwanshu-kumar/test-arena-front-end.git
       cd test-arena-front-end
-
+   ```
 
 ## Screenshots
 ![1](https://github.com/user-attachments/assets/fd342bfd-a9ea-4082-be6c-95009ecff69c)
