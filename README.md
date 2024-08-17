@@ -91,4 +91,4 @@ To get a local copy up and running, follow these simple steps.
 
 ## Contact
    - email : kumardiwanshu00@gmail.com
-   - linkedin : [diwanshu-kumar](linkedin.com/in/diwanshu-kumar-536793215/)
+   - linkedin : [diwanshu-kumar](https://www.linkedin.com/in/diwanshu-kumar-536793215/)
