@@ -65,11 +65,14 @@ const fetchProblemList = (problemListUrl) =>{
         }
     })
         .then(response =>{
-            if(response.status === 401){
+            if(response.status === 401) {
                 const content = document.getElementById('content');
                 content.innerHTML = `<h4 class="m-5">
                 <a style="text-decoration : none" href=${LOGIN_PAGE_URL}>Login </a> again to see the problems. current session expired  </h4>`
-
+            }else if(response.status===403){
+                const content = document.getElementById('content');
+                content.innerHTML = `<h4 class="m-5">
+                <a style="text-decoration : none" href=${LOGIN_PAGE_URL}>Login </a>as admin to see the problems.</h4>`
             }else if(!response.ok){
                 alert('No problems found!');
 
